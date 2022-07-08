@@ -1,7 +1,9 @@
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/auth';
-import 'firebase/copmpat/firestore';
-import 'firebase/compat/storage';
+import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, GoogleAuthProvider } from 'firebase/auth';
+
+
+import { getFirestore } from 'firebase/firestore';
+import { getStorage } from 'firebase/storage';
 
 
 const firebaseConfig = {
@@ -15,10 +17,15 @@ const firebaseConfig = {
 };
 
 
-if(!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
+let app = null;
+if(!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else{
+  app = getApp();
 }
 
-export const auth = firebase.auth();
-export const firestore = firebase.firestore();
-export const storage = firebase.storage();
+export const auth = getAuth(app);
+export const googleAuthProvider = new GoogleAuthProvider();
+
+export const firestore = getFirestore();
+export const storage = getStorage();
