@@ -1,5 +1,6 @@
 import Link from "next/link";
-import Image from "next/image"
+import Image from "next/image";
+import toast from 'react-hot-toast';
 
 export default function Navbar()
 {
@@ -38,7 +39,7 @@ export default function Navbar()
                     {!username && (
                         <li className="nav-item mx-2">
                             <Link href="/enter">
-                                <button className="btn btn-outline-light">Log in</button>
+                                <button className="btn btn-outline-light" onClick={() => toast.success('Logged in')}>Log in</button>
                             </Link>
                         </li>
                     )}
